@@ -1,25 +1,28 @@
 package com.product.payment.payment_service.service;
+import com.product.payment.payment_service.client.CommerceClient;
 import com.product.payment.payment_service.dto.OrderCreatedEvent;
 import org.springframework.stereotype.Service;
 
-import java.util.Random;
+//import java.util.Random;
 
 @Service
 public class PaymentProcessor {
 
-    private final Random random = new Random();
+    private final CommerceClient commerceClient;
+    //private final Random random = new Random();
+
+    public PaymentProcessor(CommerceClient commerceClient) {
+        this.commerceClient = commerceClient;
+    }
 
     public void process(OrderCreatedEvent event) {
-        System.out.println("Processing payment for order " + event.getOrderId());
+       // boolean success = random.nextBoolean();
 
-        boolean success = random.nextBoolean(); // simulate gateway
-
-        if (success) {
-            System.out.println("Payment SUCCESS for order " + event.getOrderId());
-            // next step: notify commerce-backend
-        } else {
-            System.out.println("Payment FAILED for order " + event.getOrderId());
-        }
+       // if (success) {
+            commerceClient.notifyPaymentSuccess(event.getOrderId());
+        // } else {
+        //     commerceClient.notifyPaymentFailure(event.getOrderId());
+        // }
     }
 }
 
