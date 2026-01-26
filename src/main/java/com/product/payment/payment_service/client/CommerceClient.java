@@ -15,8 +15,7 @@ public class CommerceClient {
     private final RestTemplate restTemplate = new RestTemplate();
     private final String BASE_URL;
 
-    private static final Logger log = LoggerFactory.getLogger(CommerceClient.class);
-    private CommerceClient(@Value("${commerce.service.url}") String commerceServiceUrl) {
+    public CommerceClient(@Value("${commerce.service.url}") String commerceServiceUrl) {
         this.BASE_URL = commerceServiceUrl;
     }
 
