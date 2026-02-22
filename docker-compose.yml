@@ -1,0 +1,21 @@
+services:
+  payment-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      PAYPAL_CLIENT_ID: AXGBE-_h6lwci0-rJYiUvEIpeXOhk3PWigg0FrviJqnRyX6k0l79dAxDwWv2-5jev5ft5YxyBifDoyTl
+      PAYPAL_CLIENT_SECRET: EIxN3yRZP4tFC9y87tPs3CuhtGFyhc3T13NWWce9aKLxIJTcuH1f4ECjjF52aSJiH8Ut0RI1G_l1911N
+    networks:
+      - payment-service_default
+      - commerce-backend_default
+
+volumes: {}
+
+networks:
+  payment-service_default:
+    driver: bridge
+  commerce-backend_default:
+    external: true
